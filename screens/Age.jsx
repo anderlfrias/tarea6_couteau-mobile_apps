@@ -1,14 +1,12 @@
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
+import { View, Text } from 'react-native'
+import React from 'react'
 
-export class Age extends Component {
-    render() {
-        return (
+const Age = () => {
+    return (
         <View>
             <Text>Age</Text>
         </View>
-        )
-    }
+    )
 }
 
 export default Age
