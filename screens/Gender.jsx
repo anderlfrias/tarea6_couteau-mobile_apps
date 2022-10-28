@@ -15,6 +15,12 @@ const Gender = () => {
         fetch(`https://api.genderize.io/?name=${name}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
+                if (!data?.gender){
+                    Alert.alert('Gender not found');
+                    setGender('');
+                    return;
+                }
                 setGender(data.gender);
             })
     }
@@ -62,14 +68,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
-        backgroundColor: '#FFC0FF'
+        backgroundColor: '#FF00FE'
     },
     containerMale: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
-        backgroundColor: '#00e5e5'
+        backgroundColor: '#00A6CC'
     },
     card: {
         padding: 20,
