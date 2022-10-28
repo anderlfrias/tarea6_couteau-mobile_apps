@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { SafeAreaView, Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native'
 
 const Gender = () => {
-    const [name, setName] = useState(''); // This is the name of the user
-    const [gender, setGender] = useState(''); // This
+    const [name, setName] = useState('');
+    const [gender, setGender] = useState('');
 
     const onPressSend = async() => {
         if (!name){
-            Alert.alert('Please enter your name');
+            Alert.alert('Por favor ingrese su nombre');
             setGender('');
             return;
         }
@@ -15,9 +15,8 @@ const Gender = () => {
         fetch(`https://api.genderize.io/?name=${name}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if (!data?.gender){
-                    Alert.alert('Gender not found');
+                    Alert.alert('Genero no encontrado');
                     setGender('');
                     return;
                 }
