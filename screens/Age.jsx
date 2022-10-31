@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, Text, TextInput, View, StyleSheet, Button, Alert, Image } from 'react-native'
+import { SafeAreaView, Text, TextInput, View, StyleSheet, Button, Alert, Image, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 const Age = () => {
     const [name, setName] = useState('');
@@ -61,6 +61,12 @@ const Age = () => {
     }
 
     return (
+        <TouchableWithoutFeedback
+            onPress={() => {
+                Keyboard.dismiss();
+            }}
+            accessible={false}
+        >
         <SafeAreaView>
             <View style={styles.container}>
                 <View style={styles.card}>
@@ -99,6 +105,7 @@ const Age = () => {
                 </View>
             </View>
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 

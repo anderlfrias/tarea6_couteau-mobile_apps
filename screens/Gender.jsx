@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SafeAreaView, Text, TextInput, View, StyleSheet, Button, Alert } from 'react-native'
+import { SafeAreaView, Text, TextInput, View, StyleSheet, Button, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 const Gender = () => {
     const [name, setName] = useState('');
@@ -25,6 +25,12 @@ const Gender = () => {
     }
 
     return (
+        <TouchableWithoutFeedback
+            onPress={() => {
+                Keyboard.dismiss();
+            }}
+            accessible={false}
+        >
         <SafeAreaView>
             <View style={gender === 'male' ? styles.containerMale : gender === 'female' ? styles.containerFemale : styles.container}>
                 <View style={styles.card}>
@@ -50,6 +56,7 @@ const Gender = () => {
                 </View>
             </View>
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 
