@@ -5,7 +5,6 @@ import useUtils from '../hook/useUtils';
 
 const University = () => {
     const { countries } = useUtils();
-    const [university, setUniversity] = useState('');
     const [universities, setUniversities] = useState([]);
     const [open, setOpen] = useState(false);
     const [country, setCountry] = useState(null);
@@ -23,8 +22,14 @@ const University = () => {
         return (
             <View key={index} style={styles.university}>
                 <Text style={styles.universityName}>{item.title}</Text>
-                <Text style={styles.universityDomain}>{item.domain}</Text>
-                <Text style={styles.universityWebPage}>{item.web_pages}</Text>
+                <Text style={styles.universityDomain}>
+                    Dominio:
+                    <Text style={{fontWeight: 'bold'}}> {item.domain}</Text>
+                </Text>
+                <Text style={styles.universityWebPage}>
+                    Pagina Web:
+                    <Text style={{fontWeight: 'bold'}}> {item.web_pages}</Text>
+                </Text>
             </View>
         )
     }
@@ -66,26 +71,39 @@ const University = () => {
                         color="#841584"
                         onPress={onPressSearch}
                     />
+
+                    <View style={{marginTop: 20}}>
+                        <Text style={styles.subtitle}>
+                            Resultados
+                        </Text>
+                        {
+                            universities.length > 0 ?
+                                <VirtualizedList
+                                    data={
+                                        universities.map((university, index) => {
+                                            return {
+                                                id: Math.random().toString(12).substring(0),
+                                                title: university.name,
+                                                domain: university.domains[0],
+                                                web_pages: university.web_pages[0],
+                                            };
+                                        })
+                                    }
+                                    renderItem={renderUniversity}
+                                    keyExtractor={item => item.name}
+                                    getItemCount={universities => universities.length}
+                                    getItem={getItem}
+                                />
+                            :
+                                <Text style={styles.noResults}>
+                                    No hay resultados
+                                </Text>
+                        }
+                    </View>
                 </View>
 
-                <View style={styles.card}>
-                <VirtualizedList
-                    data={
-                        universities.map((university, index) => {
-                            return {
-                                id: Math.random().toString(12).substring(0),
-                                title: university.name,
-                                domain: university.domains[0],
-                                web_pages: university.web_pages[0],
-                            };
-                        })
-                    }
-                    renderItem={renderUniversity}
-                    keyExtractor={item => item.name}
-                    getItemCount={universities => universities.length}
-                    getItem={getItem}
-                />
-                </View>
+                {/* <View style={styles.card}>
+                </View> */}
             </View>
         </SafeAreaView>
     )
@@ -113,6 +131,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
     },
+    subtitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 20,
+    },
     dropdown: {
         marginBottom: 20,
         marginTop: 10,
@@ -127,14 +151,16 @@ const styles = StyleSheet.create({
     universityName: {
         fontSize: 20,
         fontWeight: 'bold',
-        textAlign: 'center',
     },
     universityDomain: {
         fontSize: 15,
-        textAlign: 'center',
     },
     universityWebPage: {
         fontSize: 15,
-        textAlign: 'center',
     },
+    noResults: {
+        fontSize: 15,
+        textAlign: 'center',
+        color: '#ccc',
+    }
 })
