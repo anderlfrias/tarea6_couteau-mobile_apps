@@ -52,6 +52,35 @@ const Gender = () => {
                             color="#841584"
                             accessibilityLabel="Learn more about this purple button"
                         />
+
+                        {
+                            gender === 'male' && (
+                                <View style={{alignItems: 'center', marginTop: 20}}>
+                                    <Text style={styles.title}>
+                                        Su género es: Masculino
+                                    </Text>
+                                    <View style={styles.image}>
+                                        <Text style={styles.title}>
+                                            🤵
+                                        </Text>
+                                    </View>
+                                </View>
+                            )
+                        }
+                        {
+                            gender === 'female' && (
+                                <View style={{alignItems: 'center', marginTop: 20}}>
+                                    <Text style={styles.title}>
+                                        Su género es: Femenino
+                                    </Text>
+                                    <View style={styles.image}>
+                                        <Text style={styles.title}>
+                                            👩
+                                        </Text>
+                                    </View>
+                                </View>
+                            )
+                        }
                     </View>
                 </View>
             </View>
